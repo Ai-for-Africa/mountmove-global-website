@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MountMove Global – Advancing Intelligent Technology</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="shortcut icon" href="./logo2.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:    '#0d0d2b',
+            navyMid:'#12123a',
+            violet:  '#7c3aed',
+            purple:  '#9333ea',
+            lilac:   '#a78bfa',
+            soft:    '#ede9fe',
+            accent:  '#c4b5fd',
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body:    ['DM Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --navy:    #0d0d2b;
+      --navymid: #12123a;
+      --violet:  #7c3aed;
+      --purple:  #9333ea;
+      --lilac:   #a78bfa;
+      --accent:  #c4b5fd;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: #fff; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    /* ---- Gradient text ---- */
+    .grad-text {
+      background: linear-gradient(135deg, #c4b5fd 0%, #9333ea 50%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ---- Mesh background ---- */
+    .mesh-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124,58,237,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(147,51,234,0.14) 0%, transparent 55%),
+        var(--navy);
+    }
+
+    /* ---- Card glass ---- */
+    .glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(167,139,250,0.15);
+      backdrop-filter: blur(10px);
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .glass:hover {
+      border-color: rgba(167,139,250,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(124,58,237,0.18);
+    }
+
+    /* ---- Nav ---- */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+    .nav-blur {
+      background: rgba(13,13,43,0.75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(167,139,250,0.12);
+    }
+
+    /* ---- Hero section ---- */
+    .hero-section {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 60% at 85% 70%, rgba(147,51,234,0.12) 0%, transparent 50%),
+        var(--navy);
+    }
+
+    /* ---- Number counter ---- */
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; }
+
+    /* ---- Divider line ---- */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent);
+    }
+
+    /* ---- Tag pill ---- */
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 999px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(167,139,250,0.3);
+      font-size: 0.75rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 600;
+    }
+
+    /* ---- CTA button ---- */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; border-radius: 8px;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #fff; font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: .04em;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: opacity .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 8px 30px rgba(124,58,237,0.4);
+    }
+    .btn-primary:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(124,58,237,0.55); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 13px 30px; border-radius: 8px;
+      background: transparent;
+      color: var(--lilac); font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.95rem; letter-spacing: .04em;
+      border: 1.5px solid rgba(167,139,250,0.4); cursor: pointer; text-decoration: none;
+      transition: border-color .25s, background .25s, color .25s;
+    }
+    .btn-outline:hover { border-color: var(--lilac); background: rgba(167,139,250,0.08); color: #fff; }
+
+    /* ---- Service icon wrapper ---- */
+    .icon-wrap {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(147,51,234,0.15) 100%);
+      border: 1px solid rgba(167,139,250,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ---- Section labels ---- */
+    .section-label {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--lilac);
+    }
+
+    /* ---- WhatsApp float ---- */
+    .wa-float {
+      position: fixed; bottom: 90px; left: 28px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 30px rgba(37,211,102,0.45);
+      cursor: pointer; text-decoration: none;
+      transition: transform .25s, box-shadow .25s;
+      animation: waFloat 3s ease-in-out infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 14px 40px rgba(37,211,102,0.6); }
+    @keyframes waFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+    /* ---- Marquee ---- */
+    .marquee-track { display: flex; gap: 48px; animation: marquee 30s linear infinite; width: max-content; }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ---- Image card ---- */
+    .img-card { border-radius: 20px; overflow: hidden; position: relative; }
+    .img-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,43,0.7) 0%, transparent 50%);
+    }
+
+    /* ---- Globe animation ---- */
+    .globe-ring {
+      border: 1px solid rgba(167,139,250,0.2);
+      border-radius: 50%;
+      position: absolute;
+      animation: spin 18s linear infinite;
+    }
+    @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+    /* ---- Scroll reveal ---- */
+    /* Visible by default - JS will override with animation */
+    .reveal { opacity: 1; transform: translateY(0); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- Timeline dot ---- */
+    .timeline-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--purple));
+      flex-shrink: 0; margin-top: 4px;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
+    }
+
+    /* ---- Accordion ---- */
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+
+    /* ---- Noise overlay ---- */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: 0.5;
+    }
+
+    /* ---- Z stack ---- */
+    section, nav, footer, .wa-float { position: relative; z-index: 1; }
+
+    /* ---- Remove body margin/padding at bottom ---- */
+    body { margin: 0; padding: 0; min-height: 100vh; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+  <div class="nav-blur px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
+    <!-- Logo with larger size - increased for better visibility -->
+    <a href="#" class="flex items-center gap-3">
+      <img src="./logo1.png" alt="MountMove Global Logo" class="h-14 md:h-16 w-auto">
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-sm font-body text-white/70 hover:text-white transition-colors">Services</a>
+      <a href="#startups" class="text-sm font-body text-white/70 hover:text-white transition-colors">Startups</a>
+      <a href="#enterprise" class="text-sm font-body text-white/70 hover:text-white transition-colors">Enterprise</a>
+      <a href="#about" class="text-sm font-body text-white/70 hover:text-white transition-colors">About</a>
+      <a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:.85rem;">Let's Talk</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2" onclick="toggleMenu()">
+      <span class="w-6 h-0.5 bg-white/80 block"></span>
+      <span class="w-6 h-0.5 bg-white/80 block"></span>
+      <span class="w-6 h-0.5 bg-white/80 block"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden nav-blur px-6 py-4 flex flex-col gap-4">
+    <a href="#services" class="text-white/80 font-body" onclick="closeMenu()">Services</a>
+    <a href="#startups" class="text-white/80 font-body" onclick="closeMenu()">Startups</a>
+    <a href="#enterprise" class="text-white/80 font-body" onclick="closeMenu()">Enterprise</a>
+    <a href="#about" class="text-white/80 font-body" onclick="closeMenu()">About</a>
+    <a href="#contact" class="btn-primary self-start" onclick="closeMenu()">Let's Talk</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-section flex flex-col items-center justify-center text-center px-6 pt-32 pb-24 relative overflow-hidden">
+  <!-- decorative rings -->
+  <div class="globe-ring" style="width:500px;height:500px;top:50%;left:50%;margin:-250px 0 0 -250px;opacity:.07;"></div>
+  <div class="globe-ring" style="width:750px;height:750px;top:50%;left:50%;margin:-375px 0 0 -375px;opacity:.05;animation-duration:28s;animation-direction:reverse;"></div>
+
+  <div class="pill mb-6 reveal">🌍 &nbsp;Advancing Intelligent Technology Globally</div>
+
+  <h1 class="font-display font-800 text-5xl md:text-7xl leading-[1.05] max-w-4xl reveal" style="font-weight:800;animation-delay:.1s;">
+    We Build The <span class="grad-text">Digital Future</span><br/>Your Business Deserves
+  </h1>
+
+  <p class="mt-6 text-white/60 max-w-2xl text-lg md:text-xl font-body font-300 leading-relaxed reveal" style="animation-delay:.2s;">
+    From mobile apps and web platforms to complete office setups and startup incubation — MountMove Global is your end-to-end technology and growth partner.
+  </p>
+
+  <div class="mt-10 flex flex-wrap gap-4 justify-center reveal" style="animation-delay:.3s;">
+    <a href="#services" class="btn-primary">Explore Services &nbsp;→</a>
+    <a href="#contact" class="btn-outline">Book a Free Consult</a>
+  </div>
+
+  <!-- hero image mosaic -->
+  <div class="mt-20 w-full max-w-5xl reveal" style="animation-delay:.45s;">
+    <div class="grid grid-cols-12 gap-3 h-[420px]">
+      <!-- large left image -->
+      <div class="col-span-5 img-card">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="Team collaboration" style="height:420px;"/>
+        <div class="img-overlay"></div>
+        <div class="absolute bottom-5 left-5 text-left">
+          <div class="pill" style="font-size:.65rem;">🚀 Team Excellence</div>
+        </div>
+      </div>
+      <!-- two stacked right images -->
+      <div class="col-span-4 flex flex-col gap-3">
+        <div class="img-card flex-1">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80" alt="Tech analytics dashboard" style="height:200px;"/>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="img-card flex-1">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&q=80" alt="Modern office" style="height:200px;"/>
+          <div class="img-overlay"></div>
+        </div>
+      </div>
+      <!-- tall right image -->
+      <div class="col-span-3 img-card">
+        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80" alt="Startup founder" style="height:420px;"/>
+        <div class="img-overlay"></div>
+        <div class="absolute bottom-5 left-5 right-5 text-left">
+          <div class="pill" style="font-size:.65rem;">💡 Startup Ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="py-16 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="divider mb-16"></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
+      <div>
+        <div class="stat-num text-4xl md:text-5xl grad-text">50+</div>
+        <div class="text-white/50 text-sm mt-2 font-body">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="stat-num text-4xl md:text-5xl grad-text">12+</div>
+        <div class="text-white/50 text-sm mt-2 font-body">Countries Served</div>
+      </div>
+      <div>
+        <div class="stat-num text-4xl md:text-5xl grad-text">30+</div>
+        <div class="text-white/50 text-sm mt-2 font-body">Startups Supported</div>
+      </div>
+      <div>
+        <div class="stat-num text-4xl md:text-5xl grad-text">98%</div>
+        <div class="text-white/50 text-sm mt-2 font-body">Client Satisfaction</div>
+      </div>
+    </div>
+    <div class="divider mt-16"></div>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<section class="py-6 overflow-hidden">
+  <div class="marquee-track opacity-30">
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Flutter Apps</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">React Native</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Web Platforms</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Office Setup</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Startup Incubation</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">AI Optimisation</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Tech Partnership</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Growth Strategy</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <!-- repeat for seamless loop -->
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Flutter Apps</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">React Native</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Web Platforms</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Office Setup</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Startup Incubation</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">AI Optimisation</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Tech Partnership</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+    <span class="text-white text-sm font-display font-600 tracking-widest uppercase">Growth Strategy</span>
+    <span class="grad-text text-sm font-display font-600 tracking-widest uppercase">✦</span>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services" class="py-24 px-6 mesh-bg">
+  <div class="max-w-6xl mx-auto">
+    <div class="section-label mb-4 reveal">What We Do</div>
+    <h2 class="font-display font-800 text-4xl md:text-5xl max-w-2xl leading-tight reveal" style="font-weight:800;">
+      Full-Spectrum Tech <span class="grad-text">Services</span>
+    </h2>
+    <p class="mt-4 text-white/55 max-w-xl font-body text-lg reveal">
+      Whether you're an established enterprise or a bold founder, we bring the tools, talent, and strategy to move your vision forward.
+    </p>
+
+    <!-- Service grid -->
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- 1 Flutter -->
+      <div class="glass rounded-2xl p-7 reveal">
+        <div class="icon-wrap mb-5">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M3 6l9-3 9 3-9 3z" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 6v12l9 3 9-3V6" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 12l9 3 9-3" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">Flutter App Development</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          Build or revamp cross-platform mobile apps for individuals and organisations with Flutter — beautiful, fast, and production-ready.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">iOS</span>
+          <span class="pill" style="font-size:.65rem;">Android</span>
+          <span class="pill" style="font-size:.65rem;">Cross-platform</span>
+        </div>
+      </div>
+
+      <!-- 2 React Native -->
+      <div class="glass rounded-2xl p-7 reveal">
+        <div class="icon-wrap mb-5">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="#a78bfa" stroke-width="1.8"/><ellipse cx="12" cy="12" rx="10" ry="4" stroke="#a78bfa" stroke-width="1.8"/><ellipse cx="12" cy="12" rx="10" ry="4" stroke="#a78bfa" stroke-width="1.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" stroke="#a78bfa" stroke-width="1.8" transform="rotate(120 12 12)"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">React Native Apps</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          Powerful native mobile experiences built with React Native — fast development cycles, shared codebases, and seamless UX.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">Mobile</span>
+          <span class="pill" style="font-size:.65rem;">React</span>
+          <span class="pill" style="font-size:.65rem;">Performance</span>
+        </div>
+      </div>
+
+      <!-- 3 Web / Webapps -->
+      <div class="glass rounded-2xl p-7 reveal">
+        <div class="icon-wrap mb-5">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#a78bfa" stroke-width="1.8"/><path d="M3 9h18" stroke="#a78bfa" stroke-width="1.8"/><circle cx="6.5" cy="7" r="0.8" fill="#a78bfa"/><circle cx="9" cy="7" r="0.8" fill="#a78bfa"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">Websites & Web Apps</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          From landing pages to complex SaaS platforms — we design, build, and revamp websites and web applications that convert visitors into clients.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">SaaS</span>
+          <span class="pill" style="font-size:.65rem;">E-commerce</span>
+          <span class="pill" style="font-size:.65rem;">Portals</span>
+        </div>
+      </div>
+
+      <!-- 4 Office Setup -->
+      <div class="glass rounded-2xl p-7 reveal">
+        <div class="icon-wrap mb-5">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/><rect x="9" y="14" width="6" height="7" rx="1" stroke="#a78bfa" stroke-width="1.8"/><path d="M9 11h6" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">Complete Office Setup</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          From business name registration to a fully equipped workspace — internet, CCTV, telecoms, furniture, and equipment. We set up your office end-to-end.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">Registration</span>
+          <span class="pill" style="font-size:.65rem;">CCTV</span>
+          <span class="pill" style="font-size:.65rem;">Telecoms</span>
+        </div>
+      </div>
+
+      <!-- 5 Startup Setup -->
+      <div class="glass rounded-2xl p-7 reveal" style="border-color:rgba(167,139,250,0.35);">
+        <div class="icon-wrap mb-5" style="background:linear-gradient(135deg,rgba(124,58,237,0.45),rgba(147,51,234,0.3));">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z" stroke="#c4b5fd" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">Startup Launch & Setup</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          From idea to market — we guide you through concept development, product design, business registration, tech stack, and go-live strategy.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">Idea to MVP</span>
+          <span class="pill" style="font-size:.65rem;">Go-to-Market</span>
+          <span class="pill" style="font-size:.65rem;">Launch</span>
+        </div>
+      </div>
+
+      <!-- 6 AI Optimisation -->
+      <div class="glass rounded-2xl p-7 reveal">
+        <div class="icon-wrap mb-5">
+          <svg width="26" height="26" fill="none" viewBox="0 0 24 24"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4z" stroke="#a78bfa" stroke-width="1.8"/><path d="M8 13H5a2 2 0 00-2 2v5h18v-5a2 2 0 00-2-2h-3" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round"/><path d="M9 17l2 2 4-4" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-display font-700 text-lg text-white mb-2" style="font-weight:700;">AI-Powered Sales Optimisation</h3>
+        <p class="text-white/55 text-sm font-body leading-relaxed">
+          We use artificial intelligence to analyse your sales pipeline, identify gaps, automate workflows, and drive measurable revenue growth.
+        </p>
+        <div class="mt-5 flex gap-2 flex-wrap">
+          <span class="pill" style="font-size:.65rem;">AI</span>
+          <span class="pill" style="font-size:.65rem;">Automation</span>
+          <span class="pill" style="font-size:.65rem;">Revenue</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ENTERPRISE SECTION ===================== -->
+<section id="enterprise" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="section-label mb-4 reveal">Established Businesses</div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl leading-tight reveal" style="font-weight:800;">
+          Built for<br/><span class="grad-text">Enterprises, NGOs</span><br/>& Governments
+        </h2>
+        <p class="mt-6 text-white/55 font-body text-base leading-relaxed reveal">
+          We understand the complexity of large organisations. Our teams work alongside your existing infrastructure to modernise, scale, and secure your technology stack — with zero disruption to your operations.
+        </p>
+        <ul class="mt-8 space-y-4 reveal">
+          <li class="flex items-start gap-3">
+            <div class="timeline-dot mt-1"></div>
+            <div>
+              <div class="text-white font-body font-500" style="font-weight:500;">Legacy System Modernisation</div>
+              <div class="text-white/45 text-sm">Revamp outdated platforms into modern, scalable architecture.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="timeline-dot mt-1"></div>
+            <div>
+              <div class="text-white font-body font-500" style="font-weight:500;">Custom Enterprise Software</div>
+              <div class="text-white/45 text-sm">Bespoke apps and portals built around your workflows.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="timeline-dot mt-1"></div>
+            <div>
+              <div class="text-white font-body font-500" style="font-weight:500;">Smart Office Infrastructure</div>
+              <div class="text-white/45 text-sm">End-to-end workspace setup with connectivity, security, and equipment.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="timeline-dot mt-1"></div>
+            <div>
+              <div class="text-white font-body font-500" style="font-weight:500;">AI Process Automation</div>
+              <div class="text-white/45 text-sm">Intelligent tools that reduce cost, increase speed, and improve decisions.</div>
+            </div>
+          </li>
+        </ul>
+        <div class="mt-10 reveal">
+          <a href="#contact" class="btn-primary">Talk to Our Team →</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 reveal">
+        <div class="img-card" style="height:240px;">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=80" alt="Enterprise professional" />
+          <div class="img-overlay"></div>
+        </div>
+        <div class="img-card" style="height:240px;margin-top:32px;">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80" alt="Office team" />
+          <div class="img-overlay"></div>
+        </div>
+        <div class="img-card" style="height:200px;">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" alt="Modern workspace" />
+          <div class="img-overlay"></div>
+        </div>
+        <div class="img-card" style="height:200px;margin-top:32px;">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80" alt="Tech team" />
+          <div class="img-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STARTUPS ===================== -->
+<section id="startups" class="py-28 px-6 mesh-bg">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="section-label mb-4 reveal">Startup Ecosystem</div>
+      <h2 class="font-display font-800 text-4xl md:text-5xl max-w-3xl mx-auto leading-tight reveal" style="font-weight:800;">
+        Your Startup's <span class="grad-text">Growth Partner</span> From Day One
+      </h2>
+      <p class="mt-5 text-white/55 max-w-2xl mx-auto font-body text-lg reveal">
+        Whether you're pre-idea or post-MVP, we bring structure, strategy, and execution support so you grow faster — with less guesswork.
+      </p>
+    </div>
+
+    <!-- Two big startup pillars -->
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+
+      <!-- Tech Partner / Co-founder -->
+      <div class="glass rounded-3xl p-9 reveal" style="background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(147,51,234,0.06));border-color:rgba(167,139,250,0.3);">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="icon-wrap" style="width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,rgba(124,58,237,0.5),rgba(147,51,234,0.3));">
+            <svg width="30" height="30" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#c4b5fd" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#c4b5fd" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87" stroke="#c4b5fd" stroke-width="1.8" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75" stroke="#c4b5fd" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="pill mb-2" style="font-size:.65rem;">Equity Partnership</div>
+            <h3 class="font-display font-700 text-2xl text-white" style="font-weight:700;">Tech Partner & Co-founder</h3>
+          </div>
+        </div>
+        <p class="text-white/60 font-body leading-relaxed text-base">
+          Struggling to raise the full development budget? We become your technical co-founder. Our tech contribution can cover up to <strong class="text-white">50% of development costs as equity</strong>, while you focus on raising the other 50%. You keep your vision — we bring the technology.
+        </p>
+        <div class="mt-7 grid grid-cols-2 gap-3">
+          <div class="glass rounded-xl p-4" style="border-color:rgba(167,139,250,0.2);">
+            <div class="text-2xl font-display font-800 grad-text" style="font-weight:800;">50%</div>
+            <div class="text-white/45 text-xs mt-1">Tech costs as equity</div>
+          </div>
+          <div class="glass rounded-xl p-4" style="border-color:rgba(167,139,250,0.2);">
+            <div class="text-2xl font-display font-800 grad-text" style="font-weight:800;">0</div>
+            <div class="text-white/45 text-xs mt-1">Upfront cost to you</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Startup Growth Sprint -->
+      <div class="glass rounded-3xl p-9 reveal" style="animation-delay:.15s;background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(147,51,234,0.06));border-color:rgba(167,139,250,0.3);">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="icon-wrap" style="width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,rgba(124,58,237,0.5),rgba(147,51,234,0.3));">
+            <svg width="30" height="30" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#c4b5fd" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="pill mb-2" style="font-size:.65rem;">Incubation Programme</div>
+            <h3 class="font-display font-700 text-2xl text-white" style="font-weight:700;">Startup Growth Sprint</h3>
+          </div>
+        </div>
+        <p class="text-white/60 font-body leading-relaxed text-base">
+          A practical, founder-friendly sprint designed to take you from "we have a product" to "we have a repeatable growth plan." We tighten your value proposition, refine go-to-market, improve your investor pitch, and set up metrics that show progress.
+        </p>
+        <ul class="mt-6 space-y-2">
+          <li class="flex items-center gap-2 text-white/65 text-sm font-body">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+            Value proposition refinement
+          </li>
+          <li class="flex items-center gap-2 text-white/65 text-sm font-body">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+            Investor pitch & storytelling
+          </li>
+          <li class="flex items-center gap-2 text-white/65 text-sm font-body">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+            Growth metrics & accountability
+          </li>
+          <li class="flex items-center gap-2 text-white/65 text-sm font-body">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+            Reusable templates & execution tools
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Startup journey steps -->
+    <div class="glass rounded-2xl p-8 md:p-10 reveal">
+      <h3 class="font-display font-700 text-xl text-white mb-8 text-center" style="font-weight:700;">Your Journey With Us</h3>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3" style="background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(147,51,234,0.2));border:1px solid rgba(167,139,250,0.3);">
+            <span class="grad-text font-display font-800 text-lg" style="font-weight:800;">1</span>
+          </div>
+          <div class="text-white text-sm font-body font-500" style="font-weight:500;">Idea &amp; Vision</div>
+          <div class="text-white/40 text-xs mt-1">Refine and validate</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3" style="background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(147,51,234,0.2));border:1px solid rgba(167,139,250,0.3);">
+            <span class="grad-text font-display font-800 text-lg" style="font-weight:800;">2</span>
+          </div>
+          <div class="text-white text-sm font-body font-500" style="font-weight:500;">Build MVP</div>
+          <div class="text-white/40 text-xs mt-1">Ship fast, learn faster</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3" style="background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(147,51,234,0.2));border:1px solid rgba(167,139,250,0.3);">
+            <span class="grad-text font-display font-800 text-lg" style="font-weight:800;">3</span>
+          </div>
+          <div class="text-white text-sm font-body font-500" style="font-weight:500;">Growth Sprint</div>
+          <div class="text-white/40 text-xs mt-1">Strategy &amp; traction</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3" style="background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(147,51,234,0.2));border:1px solid rgba(167,139,250,0.3);">
+            <span class="grad-text font-display font-800 text-lg" style="font-weight:800;">4</span>
+          </div>
+          <div class="text-white text-sm font-body font-500" style="font-weight:500;">Raise & Scale</div>
+          <div class="text-white/40 text-xs mt-1">Investor-ready pitch</div>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3" style="background:linear-gradient(135deg,rgba(124,58,237,0.5),rgba(147,51,234,0.4));border:1px solid rgba(167,139,250,0.5);">
+            <span class="grad-text font-display font-800 text-lg" style="font-weight:800;">5</span>
+          </div>
+          <div class="text-white text-sm font-body font-500" style="font-weight:500;">Grow Global</div>
+          <div class="text-white/40 text-xs mt-1">World-class product</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center reveal">
+      <a href="#contact" class="btn-primary">Start Your Startup Journey →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOCIAL PROOF / ABOUT ===================== -->
+<section id="about" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- image collage -->
+      <div class="relative reveal">
+        <div class="img-card" style="height:380px;">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80" alt="Team meeting" />
+          <div class="img-overlay"></div>
+        </div>
+        <!-- floating card -->
+        <div class="absolute -bottom-6 -right-6 glass rounded-xl p-5 max-w-xs" style="border-color:rgba(167,139,250,0.3);">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full" style="background:linear-gradient(135deg,var(--violet),var(--purple));"></div>
+            <div class="text-white text-sm font-display font-700" style="font-weight:700;">Global Reach</div>
+          </div>
+          <p class="text-white/55 text-xs font-body">Clients across Europe, Africa, and the Americas — growing daily.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label mb-4 reveal">Who We Are</div>
+        <h2 class="font-display font-800 text-4xl md:text-5xl leading-tight reveal" style="font-weight:800;">
+          Technology with a <span class="grad-text">Human Touch</span>
+        </h2>
+        <p class="mt-6 text-white/60 font-body text-base leading-relaxed reveal">
+          MountMove Global is a technology and business enablement company headquartered to serve clients worldwide. We combine deep technical expertise with real-world business acumen — delivering solutions that don't just work, but genuinely advance your goals.
+        </p>
+        <p class="mt-4 text-white/60 font-body text-base leading-relaxed reveal">
+          Our team has worked with solo founders, SMEs, NGOs, and government institutions — giving us a rare ability to adapt and deliver across every scale and sector.
+        </p>
+        <div class="mt-8 glass rounded-xl p-6 reveal" style="border-color:rgba(167,139,250,0.25);">
+          <div class="section-label mb-2">Our Promise</div>
+          <p class="text-white font-body leading-relaxed">
+            "We don't just build products — we build partnerships. Every client's success is our success, and we don't stop until you're growing."
+          </p>
+          <div class="mt-3 text-white/40 text-sm">— MountMove Global Team</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BAND ===================== -->
+<section class="py-20 px-6 overflow-hidden relative">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,0.25) 0%,rgba(147,51,234,0.15) 100%);border-top:1px solid rgba(167,139,250,0.15);border-bottom:1px solid rgba(167,139,250,0.15);"></div>
+  <div class="max-w-4xl mx-auto text-center relative reveal">
+    <h2 class="font-display font-800 text-4xl md:text-5xl leading-tight" style="font-weight:800;">
+      Ready to Build Something <span class="grad-text">Extraordinary?</span>
+    </h2>
+    <p class="mt-5 text-white/60 font-body text-lg max-w-xl mx-auto">
+      Let's talk about your project, your business, or your big idea. First conversation is always free.
+    </p>
+    <div class="mt-8 flex gap-4 justify-center flex-wrap">
+      <a href="/cdn-cgi/l/email-protection#93fafdf5fcd3fefce6fde7fefce5f6bdfce1f4" class="btn-primary">Email Us Today →</a>
+      <a href="https://wa.me/447534168423" target="_blank" class="btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="py-28 px-6 mesh-bg">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="section-label mb-4 reveal">Get In Touch</div>
+      <h2 class="font-display font-800 text-4xl md:text-5xl reveal" style="font-weight:800;">
+        Let's <span class="grad-text">Start a Conversation</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+      <!-- Contact info -->
+      <div class="reveal">
+        <div class="glass rounded-2xl p-8">
+          <h3 class="font-display font-700 text-xl text-white mb-6" style="font-weight:700;">Reach Us Directly</h3>
+          <div class="space-y-6">
+            <a href="mailto:info@mountmove.org" class="flex items-center gap-4 group">
+              <div class="icon-wrap">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#a78bfa" stroke-width="1.8"/><path d="M22 6l-10 7L2 6" stroke="#a78bfa" stroke-width="1.8"/></svg>
+              </div>
+              <div>
+                <div class="text-white/40 text-xs mb-0.5">Email Us</div>
+                <div class="text-white font-body group-hover:text-lilac transition-colors" style="color:var(--lilac);"><span class="__cf_email__" data-cfemail="info@mountmove.org ">info@mountmove.org </span></div>
+              </div>
+            </a>
+            <a href="https://wa.me/447534168423" target="_blank" class="flex items-center gap-4 group">
+              <div class="icon-wrap">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="text-white/40 text-xs mb-0.5">WhatsApp</div>
+                <div class="text-white font-body group-hover:text-lilac transition-colors" style="color:var(--lilac);">+44 7534 168423</div>
+              </div>
+            </a>
+            <div class="flex items-center gap-4">
+              <div class="icon-wrap">
+                <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#a78bfa" stroke-width="1.8"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="#a78bfa" stroke-width="1.8"/></svg>
+              </div>
+              <div>
+                <div class="text-white/40 text-xs mb-0.5">Serving Clients</div>
+                <div class="text-white font-body" style="color:var(--lilac);">Globally — Everywhere</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick form -->
+      <div class="glass rounded-2xl p-8 reveal" style="animation-delay:.15s;">
+        <h3 class="font-display font-700 text-xl text-white mb-6" style="font-weight:700;">Send Us a Message</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="text-white/50 text-xs font-body block mb-1.5">Your Name</label>
+            <input type="text" placeholder="Full name" class="w-full px-4 py-3 rounded-xl text-white text-sm font-body placeholder-white/25 outline-none" style="background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.2);" onfocus="this.style.borderColor='rgba(167,139,250,0.5)'" onblur="this.style.borderColor='rgba(167,139,250,0.2)'" />
+          </div>
+          <div>
+            <label class="text-white/50 text-xs font-body block mb-1.5">Email Address</label>
+            <input type="email" placeholder="info@mountmove.org " class="w-full px-4 py-3 rounded-xl text-white text-sm font-body placeholder-white/25 outline-none" style="background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.2);" onfocus="this.style.borderColor='rgba(167,139,250,0.5)'" onblur="this.style.borderColor='rgba(167,139,250,0.2)'" />
+          </div>
+          <div>
+            <label class="text-white/50 text-xs font-body block mb-1.5">What do you need?</label>
+            <select class="w-full px-4 py-3 rounded-xl text-white text-sm font-body outline-none" style="background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.2);color:rgba(255,255,255,0.6);" onfocus="this.style.borderColor='rgba(167,139,250,0.5)'" onblur="this.style.borderColor='rgba(167,139,250,0.2)'">
+              <option value="" style="background:#12123a;">Select a service</option>
+              <option value="flutter" style="background:#12123a;">Flutter App Development</option>
+              <option value="rn" style="background:#12123a;">React Native App</option>
+              <option value="web" style="background:#12123a;">Website / Web App</option>
+              <option value="office" style="background:#12123a;">Office Setup</option>
+              <option value="startup" style="background:#12123a;">Startup Launch</option>
+              <option value="techpartner" style="background:#12123a;">Tech Partnership / Co-founder</option>
+              <option value="growth" style="background:#12123a;">Startup Growth Sprint</option>
+              <option value="ai" style="background:#12123a;">AI Sales Optimisation</option>
+              <option value="other" style="background:#12123a;">Something Else</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-white/50 text-xs font-body block mb-1.5">Message</label>
+            <textarea rows="3" placeholder="Tell us about your project..." class="w-full px-4 py-3 rounded-xl text-white text-sm font-body placeholder-white/25 outline-none resize-none" style="background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.2);" onfocus="this.style.borderColor='rgba(167,139,250,0.5)'" onblur="this.style.borderColor='rgba(167,139,250,0.2)'"></textarea>
+          </div>
+          <a href="mailto:info@mountmove.org" class="btn-primary w-full justify-center" style="display:flex;">Send Message →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="https://wa.me/447534168423" target="_blank" class="wa-float" title="Chat with us on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<!-- ===================== FOOTER ===================== -->
+<footer class="py-14 px-6" style="background:rgba(0,0,0,0.3);border-top:1px solid rgba(167,139,250,0.12);margin-bottom:0;">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <!-- Logo image - increased size for better visibility in footer -->
+          <img src="./logo1.png" alt="MountMove Global" class="h-14 w-auto">
+          <div>
+            <div class="font-display font-800 text-white text-sm" style="font-weight:800;">MOUNTMOVE GLOBAL</div>
+            <div class="text-xs tracking-widest font-display" style="color:var(--lilac);font-weight:600;">ADVANCING INTELLIGENT TECHNOLOGY</div>
+          </div>
+        </div>
+        <p class="text-white/40 text-sm font-body max-w-xs leading-relaxed">
+          Your end-to-end technology and growth partner — from mobile apps to startup incubation and enterprise transformation.
+        </p>
+        <div class="mt-5">
+          <a href="mailto:info@mountmove.org" class="text-sm font-body" style="color:var(--lilac);"><span class="__cf_email__" data-cfemail="info@mountmove.org ">info@mountmove.org </span></a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <div class="section-label mb-4">Services</div>
+        <ul class="space-y-2 text-sm font-body text-white/45">
+          <li><a href="#services" class="hover:text-white transition-colors">Flutter Development</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">React Native Apps</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">Websites & Web Apps</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">Office Setup</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors">AI Optimisation</a></li>
+        </ul>
+      </div>
+
+      <!-- Startups -->
+      <div>
+        <div class="section-label mb-4">Startups</div>
+        <ul class="space-y-2 text-sm font-body text-white/45">
+          <li><a href="#startups" class="hover:text-white transition-colors">Tech Partnership</a></li>
+          <li><a href="#startups" class="hover:text-white transition-colors">Growth Sprint</a></li>
+          <li><a href="#startups" class="hover:text-white transition-colors">Startup Launch</a></li>
+          <li><a href="#startups" class="hover:text-white transition-colors">Co-founder Equity</a></li>
+          <li><a href="#contact" class="hover:text-white transition-colors">Book a Call</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider mb-6"></div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-xs font-body">
+      <div>© 2025 MountMove Global Ltd. All rights reserved.</div>
+      <div class="flex gap-6">
+        <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== WHATSAPP FLOAT ===================== -->
+
+
+<!-- ===================== SCRIPTS ===================== -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    var m = document.getElementById('mobileMenu');
+    m.classList.toggle('hidden');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.add('hidden');
+  }
+
+  // Scroll reveal — safe approach: content is visible by default,
+  // JS progressively enhances with animations only if observer works
+  (function() {
+    var style = document.createElement('style');
+    style.textContent = '.reveal { opacity: 0 !important; transform: translateY(24px) !important; transition: opacity .7s ease, transform .7s ease !important; } .reveal.visible { opacity: 1 !important; transform: translateY(0) !important; }';
+    document.head.appendChild(style);
+
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: show everything immediately
+      els.forEach(function(el) { el.classList.add('visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    els.forEach(function(el) { observer.observe(el); });
+
+    // Safety net: if nothing becomes visible after 1.5s, show everything
+    setTimeout(function() {
+      els.forEach(function(el) { el.classList.add('visible'); });
+    }, 1500);
+  })();
+
+  // Nav background on scroll
+  window.addEventListener('scroll', function() {
+    var nb = document.querySelector('.nav-blur');
+    if (nb) {
+      nb.style.background = window.scrollY > 30
+        ? 'rgba(13,13,43,0.97)'
+        : 'rgba(13,13,43,0.75)';
+    }
+  });
+</script>
+</body>
+</html>
